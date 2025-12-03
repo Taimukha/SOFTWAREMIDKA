@@ -1,0 +1,23 @@
+services:
+  backend-service:
+    image: 'project-software-iso'
+    container_name: 'project-software-iso'
+    depends_on:
+      - database-service
+    environment:
+      - spring.datasource.url=jdbc:postgresql://database-service:5432/postgress
+      - spring.datasource.username=postgres
+      - spring.datasource.password=Aiauka2005
+      - spring.jpa.hibernate.ddl-auto=update
+      - spring.jpa.show-sql=true
+    ports:
+      - 4444:8080
+  database-service:
+    image: "postgres"
+    container_name: 'database-software-iso'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Aiauka2005
+      - POSTGRES_DB=postgress
+    ports:
+      - 5433:5432
